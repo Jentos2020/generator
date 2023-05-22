@@ -1,0 +1,38 @@
+/venv
+/test
+/media
+/nginx
+/nginx.conf
+/frontend/node_modules/
+npm-debug.log
+/monkey_site/monkey_site/secret.py
+/monkey_site/media/docs/random_faces/*
+/monkey_site/media/docs/dirt/*
+/monkey_site/media/docs/doc_templates/*
+result.txt
+Instructions.md
+package-lock.json
+photogen.html
+
+*.pyc
+/monkey_site/db.sqlite3
+.DS_Store
+*/settings/local.py
+__pycache__/
+/.vscode/
+
+# data
+*.dump
+
+
+# Webpack
+/frontend/bundles/*
+/frontend/webpack_bundles/*
+/webpack-stats.json
+
+# templated email
+tmp_email/
+
+.direnv
+.envrc
+.tool-versions
