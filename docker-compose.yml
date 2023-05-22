@@ -1,0 +1,55 @@
+version: "3.8"
+
+services:
+  backend:
+    build: ./monkey_site
+    container_name: backend
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./monkey_site:/usr/src/monkey_site
+    ports: 
+      - "8000:8000"
+    environment:
+      - DEBUG=1
+      - DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1
+      - CELERY_BROKER=redis://redis:6379/0
+      - CELERY_BACKEND=redis://redis:6379/
+    depends_on:
+      - redis
+
+  celery: 
+    build: ./monkey_site
+    command: celery -A monkey_site worker --loglevel=INFO
+    volumes:
+      - ./monkey_site:/usr/src/monkey_site/
+    environment:
+      - TZ=Asia/Novosibirsk
+    depends_on:
+      - backend 
+      - redis
+
+  celery-beat:
+    build: ./monkey_site
+    command: celery -A monkey_site beat --loglevel=INFO
+    volumes:
+      - ./monkey_site:/usr/src/monkey_site/
+    environment:
+      - TZ=Asia/Novosibirsk
+    depends_on:
+      - celery
+
+  redis:
+    image: "redis:alpine"
+    volumes:
+      - ./monkey_site:/usr/src/monkey_site/
+    environment:
+      TZ: Asia/Novosibirsk
+
+  # flower:
+  #   image: mher/flower
+  #   ports:
+  #     - "5555:5555"
+  #   environment:
+  #     - CELERY_BROKER_URL=redis://redis:6379/0
+  #     - FLOWER_PORT=5555
+  #     - TZ=Asia/Novosibirsk
