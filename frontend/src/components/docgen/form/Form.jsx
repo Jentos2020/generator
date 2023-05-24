@@ -98,7 +98,7 @@ const Form = () => {
                 </div>
                 <div className="col-6">
                     <label htmlFor="inputAddress" className="form-label">Дата рождения</label>
-                    <input ref={dateField} type="text" className="form-control" id="birthday" name="birthday" placeholder="гггг-мм-дд" onChange={e => setFormData({ ...formData, birthday: e.target.value })} />
+                    <input ref={dateField} type="text" className="form-control" id="birthday" name="birthday" placeholder="дд-мм-гггг" onChange={e => setFormData({ ...formData, birthday: e.target.value })} />
                     <div className="invalid-feedback">
                         Укажите корректную дату рождения.
                     </div>
