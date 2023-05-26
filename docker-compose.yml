@@ -43,7 +43,7 @@ services:
     volumes:
       - ./monkey_site:/usr/src/monkey_site/
     environment:
-      TZ: Asia/Novosibirsk
+      - TZ=Asia/Novosibirsk
 
   # flower:
   #   image: mher/flower
